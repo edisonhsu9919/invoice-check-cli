@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# invoice-check-cli: managed invoice verification phone-use service for AgentD
+#
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SERVICE_DIR="$(dirname "$DIR")"
+VENV_PYTHON="$SERVICE_DIR/.venv/bin/python"
+
+if [ -f "$SERVICE_DIR/.env" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$SERVICE_DIR/.env"
+  set +a
+fi
+
+if [ ! -f "$VENV_PYTHON" ]; then
+  echo "Error: Virtual environment not found at $VENV_PYTHON." >&2
+  echo "Create the service venv and install requirements.txt first." >&2
+  exit 1
+fi
+
+export INVOICE_CHECK_CONFIG="${INVOICE_CHECK_CONFIG:-$SERVICE_DIR/config/defaults.json}"
+cd "$SERVICE_DIR"
+
+exec "$VENV_PYTHON" "$SERVICE_DIR/cli.py" "$@"

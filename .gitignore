@@ -1,0 +1,48 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Node (in case any UI tooling is added later)
+node_modules/
+.next/
+.turbo/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Real config / secrets — only *.example.* committed
+.env
+*.env
+service.env
+config/service.env
+
+# Runtime artifacts
+work/
+output/
+outputs/
+tmp/
+cache/
+*.log
+
+# Test / verification artifacts
+validation_screenshots/
+invoice_check_results.zip
+*.xlsx
+*.xls
+trace.jsonl
+summary.json
+batch_report.json
+
+# Local registry overrides
+agentd/cli_registry.json

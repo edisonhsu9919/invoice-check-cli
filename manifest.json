@@ -1,0 +1,10 @@
+{
+  "service_name": "invoice-check-cli",
+  "service_slug": "invoice-check-cli",
+  "service_version": "0.1.0",
+  "entrypoint": "bin/invoice-check-cli",
+  "supports_detached": true,
+  "owner_skill": "invoice-check",
+  "has_daemon": false,
+  "daemon_entrypoint": null
+}
