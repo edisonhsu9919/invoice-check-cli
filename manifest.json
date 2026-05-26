@@ -1,9 +1,11 @@
 {
   "service_name": "invoice-check-cli",
   "service_slug": "invoice-check-cli",
-  "service_version": "0.1.0",
+  "service_version": "0.2.1",
   "entrypoint": "bin/invoice-check-cli",
   "supports_detached": true,
+  "has_module_queue": true,
+  "phone_resource_id": "android_phone:invoice-default",
   "owner_skill": "invoice-check",
   "has_daemon": false,
   "daemon_entrypoint": null

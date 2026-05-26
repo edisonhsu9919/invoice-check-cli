@@ -8,10 +8,21 @@ SERVICE_DIR="$(dirname "$DIR")"
 VENV_PYTHON="$SERVICE_DIR/.venv/bin/python"
 
 if [ -f "$SERVICE_DIR/.env" ]; then
-  set -a
-  # shellcheck disable=SC1091
-  source "$SERVICE_DIR/.env"
-  set +a
+  while IFS='=' read -r raw_key raw_value || [ -n "$raw_key" ]; do
+    key="${raw_key#export }"
+    key="${key%%[[:space:]]*}"
+    if [[ -z "$key" || "$key" == \#* ]]; then
+      continue
+    fi
+    if [[ "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ && -z "${!key+x}" ]]; then
+      value="${raw_value%%#*}"
+      value="${value%\"}"
+      value="${value#\"}"
+      value="${value%\'}"
+      value="${value#\'}"
+      export "$key=$value"
+    fi
+  done < "$SERVICE_DIR/.env"
 fi
 
 if [ ! -f "$VENV_PYTHON" ]; then
